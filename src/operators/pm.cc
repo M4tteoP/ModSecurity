@@ -128,9 +128,12 @@ bool Pm::init(const std::string &file, std::string *error) {
         iss = new std::istringstream(content);
     }
 
-    std::copy(std::istream_iterator<std::string>(*iss),
-        std::istream_iterator<std::string>(),
-        back_inserter(vec));
+    //std::copy(std::istream_iterator<std::string>(*iss), std::istream_iterator<std::string>(), back_inserter(vec));
+    char delim = ' ';
+    std::string temp;
+    while (std::getline(*iss, temp, delim)) {
+            vec.push_back(temp);
+    }
 
     for (auto &a : vec) {
         acmp_add_pattern(m_p, a.c_str(), NULL, NULL, a.length());
